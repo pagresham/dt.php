@@ -1,9 +1,9 @@
 <?php
 
 require 'vendor/autoload.php';
-use GuzzleHttp\Client;
-use GuzzleHttp\Psr7;
-use GuzzleHttp\Exception\RequestException;
+// use GuzzleHttp\Client;
+// use GuzzleHttp\Psr7;
+// use GuzzleHttp\Exception\RequestException;
 
 /**
 * 

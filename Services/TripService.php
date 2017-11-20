@@ -1,9 +1,9 @@
 <?php
 
 require 'vendor/autoload.php';
-use GuzzleHttp\Client;
-use GuzzleHttp\Psr7;
-use GuzzleHttp\Exception\RequestException;
+// use GuzzleHttp\Client;
+// use GuzzleHttp\Psr7;
+// use GuzzleHttp\Exception\RequestException;
 
 /**
 * Trip Service
@@ -18,6 +18,10 @@ class TripService
 	function __construct($client)
 	{
 		$this->_client = $client;
+	}
+
+	function testService() {
+		print "<p>Test Service</p>";
 	}
 
 	/**
@@ -51,7 +55,9 @@ class TripService
 																'difficulty' => $arr['difficulty'], 
 																'rating' => $arr['rating'],
 																'city' => $arr['city'], 
-																'state' => $arr['state']  
+																'state' => $arr['state'],
+																'activity' => $arr['activity'],
+																'owner' => $arr['owner'],  
 															]]);
 		if($resp->getStatusCode() == 200) {
 			return true;

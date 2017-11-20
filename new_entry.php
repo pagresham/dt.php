@@ -2,8 +2,11 @@
 
 include('includes/head.php');
 include('includes/header.php');
+// $tripService = new TripService(newClient());
+// $tripService->testService();
 
 include("Services/TripService.php");
+
 include("helpers.php");
 require('includes/guzzle.php');
 require('controllers/Control.php');
@@ -12,8 +15,8 @@ require('controllers/TripController.php');
 
 $allActivities = null;
 
-$tripService = new TripService(newClient());
-$tripController = new TripController($tripService);
+
+// $tripController = new TripController($tripService);
 
 $name= $description= $date= $rating= $difficulty= $city= $state= $lat= $lon= "";
 

@@ -19,7 +19,8 @@ class TripController
 	 * Validate New Trip
 	 */
 	function validateTrip($p) {
-		$name= $description= $date= $rating= $difficulty= $city= $state= $lat= $lon= "";
+		print "<h1>Top of the TripController!!!</h1>";
+		$name= $description= $date= $rating= $difficulty= $city= $state= $lat= $lon= $owner= $activity = "";
 		$errors = [];
 		function tr($v) {
 			return htmlspecialchars(trim($v));
@@ -35,7 +36,8 @@ class TripController
 		$state = $post['state']; 
 		$lat = $post['lat']; 
 		$lon = $post['lon'];
-
+		$owner = $post['owner'];
+		$activity = $post['activity'];
 		// print_r($post);
 		
 		if(empty($name)) {
@@ -74,7 +76,6 @@ class TripController
 				$errors['city'] = 'City is not a valid value';
 			}	
 		}
-
 		if($state != "") {
 			if(!preg_match('/^[a-zA-Z ]{1,100}$/', $state)) {
 				print "<p>". $state ."</p>";
@@ -82,21 +83,27 @@ class TripController
 				$errors['state'] = 'State is not a valid value';
 			}
 		}
-
 		if($lat != "") {
 			if(!preg_match('/^[0-9.-]{0,30}$/', $lat)) {
 				$errors['lat'] = 'Lattitude is not a valid value';
 			}
 		}
-
-
 		if($lon != "") {
 			if(!preg_match('/^[0-9.-]{0,30}$/', $lon)) {
 				print($lon);
 				$errors['lon'] = 'Longitude is not a valid value';
 			}
 		}
-
+		if(empty($activity)) {
+			$errors['activity'] = "Activity is a required field"; 
+		} else if(!preg_match('/^.{1,100}$/', $activity)) {
+			$errors['activity'] = "Activity is less than 100 characters"; 
+		}
+		if(empty($owner)) {
+			$errors['owner'] = "Onwer is a required field"; 
+		} else if(!preg_match('/^.{1,200}$/', $owner)) {
+			$errors['onwer'] = "Owner is more than 200 characters"; 
+		}
 		
 		if(!count($errors) == 0) {
 			// Should pass out these errors better - use one of those functions you wrote

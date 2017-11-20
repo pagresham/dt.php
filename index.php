@@ -1,6 +1,16 @@
 
 
 <?php
+
+// VHosts issues, couldn't get hosts to work on the Mac, but Windows worked fine.  
+// Permissions - when I switched machines
+// Turn on error reporting - How did i fix the error issues? - found error in php.ini file, that stopped logging from happening. 
+// 
+// I need to prioritize what I want to do with this app. 
+
+
+
+
 // Example of setting the status or a response manually: 
 // res.status(500).json({ error: 'something is wrong' });
 

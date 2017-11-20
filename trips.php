@@ -14,14 +14,14 @@ $tService = new TripService(newClient());
 $tController = new TripController($tService);
 
 
-
+$trips = null;
 $trips = $tController->getEntries();
+
 // print_r($trips);
 
 
 if($trips) {
 ?>
-
 	<table class="table">
 		<tr>
 			<th>Name</th>
@@ -53,7 +53,15 @@ if($trips) {
 <?php
 }
 else {
-	print "trips not true";
+	print "<p>trips not true</p>";
+	print "<p>trips not true</p>";
+	print "<p>trips not true</p>";
+	print "<p>trips not true</p>";
+	print "<p>trips not true</p>";
+	print "<p>trips not true</p>";
+	print "<p>trips not true</p>";
+	print "<p>trips not true</p>";
+
 }
 
 

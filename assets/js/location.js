@@ -1,8 +1,6 @@
 $(function() {
 	// alert("found the js file");
 	
-	console.log($('#checkht').height())
-
 	$('#difficulty').on('input', function() {
 		trackDifficulty();
 	});
