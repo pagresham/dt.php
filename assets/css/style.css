@@ -1,0 +1,15 @@
+.ui-autocomplete {
+	  border-bottom-right-radius: 6px;
+	  border-bottom-left-radius: 6px;
+	  color: #333;
+	  max-width: 8em;
+	  padding: .25em 0 0 .5em;
+	  max-height: 15em;
+	  overflow: scroll;
+	  background-color: rgba(200, 200, 200, 0.9);
+	}
+
+
+/* Keep autocomplete text from appearing at bottom */
+.ui-helper-hidden-accessible { display:none; }
+
