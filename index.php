@@ -7,7 +7,16 @@
 // Turn on error reporting - How did i fix the error issues? - found error in php.ini file, that stopped logging from happening. 
 // 
 // I need to prioritize what I want to do with this app. 
-
+// Attach activity and owner to entry
+// Include Activity in form - use a query and a text input to capture activity
+// New Activity, mini form, inside of newEntry form
+// Allow search by activity
+// Allow search by Owner
+// Incorporate a Map!
+// Photo Upload?
+// Activity Select /  new Activiyt mini form
+// User Select, so entry has an owner
+// User Input field
 
 
 
