@@ -65,6 +65,25 @@ function entriesTable($arr, $headers) {
 	print "</table>";
 }
 
+	// Used to filter search results in trips.php
+	function getBoth($t) {
+		if($t->owner == $owner && $t->activity == $activity)
+			return $v;
+	}
+	function getByOwner($t) {
+		if($t->owner == $owner)
+			return $v;
+	}
+	function getByActivity($t) {
+		if($t->activity == $activity)
+			return $v;
+	}
+	// Used to populate activity drop down on new_entry
+	function getAct($t) {
+		return $t->activity;
+	} 
+
+
 ?>
 
 

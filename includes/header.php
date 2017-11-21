@@ -1,3 +1,14 @@
+<?php 
+// get list of current owners from trips with owners
+$owners = 
+
+if(isset($_POST['submit_owner'])) {
+
+}
+
+
+ ?>
+
 <header>
   <nav class="navbar navbar-expand-sm bg-dark navbar-light">
     <ul class="navbar-nav">
@@ -39,6 +50,22 @@
           <a class="nav-link" href="new_entry.php">New Trip</a>
         </div>
       </li>
+    </ul>
+    <ul class="navbar-nav ml-auto">
+        <li>
+          <form class="form-inline">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search">
+            <button class="btn btn-success" type="submit_owner">Choose Owner</button>
+            <select>
+              <option value="Anyone">Choose Owner</option>
+              <?php foreach ($owners as $key => $value): ?>
+                <option value="<?php print $value ?>"><?php print $value ?></option>
+              <?php endforeach ?>
+            </select>
+          </form>  
+        </li>
+        
+
     </ul>
   </nav>
 

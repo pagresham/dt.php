@@ -38,7 +38,7 @@ class TripService
 	}
 
 	public function newTrip($arr) {
-		print_r($arr);
+		// print_r($arr);
 		// Didnt strip chars, didnt add slashes, Did remove SpecialChars
 		// DB will add slashes, dont need urlencode
 		// What to do since Tere are a couple fields that are not required
@@ -64,6 +64,11 @@ class TripService
 		}
 		return false;
 	}
+
+	public function getOwners() {
+		return ["Pierce", "Sam", "Drew"];
+	}
+
 
 
 }

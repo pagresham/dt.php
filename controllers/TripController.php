@@ -19,7 +19,6 @@ class TripController
 	 * Validate New Trip
 	 */
 	function validateTrip($p) {
-		print "<h1>Top of the TripController!!!</h1>";
 		$name= $description= $date= $rating= $difficulty= $city= $state= $lat= $lon= $owner= $activity = "";
 		$errors = [];
 		function tr($v) {
@@ -37,9 +36,19 @@ class TripController
 		$lat = $post['lat']; 
 		$lon = $post['lon'];
 		$owner = $post['owner'];
-		$activity = $post['activity'];
+		$activity = $post['activity-select'] || $post['activity'] || "";
 		// print_r($post);
 		
+		if(empty($activity))  {
+			$errors['activity'] = "Please select an activity type, or Enter a new one in the blank.";
+		} else if(!preg_match('/^.{1,50}$/', $activity)) {
+			$errors['activity'] = "There is a problem with Activity"; 
+		}
+		if(empty($owner))  {
+			$errors['owner'] = "Missing Onwer field";
+		} else if(!preg_match('/^.{1,50}$/', $owner)) {
+			$errors['activity'] = "There is a problem with Owner"; 
+		}
 		if(empty($name)) {
 			$errors['tname'] = "Name is a required field"; 
 		} else if(!preg_match('/^.{1,50}$/', $name)) {

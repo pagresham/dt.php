@@ -19,6 +19,9 @@
 // User Input field
 
 
+// Just write it without auth for now. Use a select box of users at the top to fake login
+// Populate dropdown from useres table, set session once validation
+
 
 // Example of setting the status or a response manually: 
 // res.status(500).json({ error: 'something is wrong' });
@@ -36,7 +39,7 @@ This is a node.js application sitting at: /Users/piercegresham/Google Drive/java
 include("Services/UserService.php");
 include("helpers.php");
 require("includes/guzzle.php");
-
+session_start();
 $userService = new UserService(newClient());
 
 

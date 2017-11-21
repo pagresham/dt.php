@@ -9,44 +9,102 @@ include("Services/TripService.php");
 include("controllers/TripController.php");
 include("helpers.php");
 require('includes/guzzle.php');
-
+session_start();
 $tService = new TripService(newClient());
 $tController = new TripController($tService);
 
 
-$trips = null;
-$trips = $tController->getEntries();
-
+$allTrips = null;
+$allTrips = $tController->getEntries();
+$trips = $allTrips;
 // print_r($trips);
 
 
-if($trips) {
-?>
-	<table class="table">
-		<tr>
-			<th>Name</th>
-			<th>Description</th>
-			<th>Date</th>
-			<th>Difficulty</th>
-			<th>Rating</th>
-			<th>City</th>
-			<th>State</th>
-			<th>LatLon</th>
-		</tr>
-		<?php foreach ($trips as $key => $value): ?>
-			<tr>
-				<td><?php echo $value->name ?></td>
-				<td><?php echo $value->description ?></td>
-				<td><?php echo $value->dateOf ?></td>
-				<td><?php echo $value->rating ?></td>
-				<td><?php echo $value->difficulty ?></td>
-				<td><?php echo $value->city ?></td>
-				<td><?php echo $value->state ?></td>
-				<td><?php echo $value->latlon ?></td>
-			</tr>
-		<?php endforeach ?>
+if($allTrips) {
 
-	</table>
+	if(isset($_POST['trip_search'])) {
+		$owner = $_POST['owner'];
+		$activity = $_POST['activity'];
+		
+		if($owner && $activity) {
+			$trips = array_map('getBoth', $allTrips);
+		} else if ($owner){
+			$trips = array_map('getByOwner', $allTrips);
+		} else if ($activity){
+			$trips = array_map('getByActivity', $allTrips);
+		} // else dont change $trips at all 
+		
+
+		
+	}
+
+
+?>
+	<style type="text/css">
+		.trip-search {
+			padding: .5em;
+		}
+		.trip-search select {
+			margin-left: .5em;
+		}
+		.trips-display {
+			font-size: 10px;
+			line-height: 4px;
+			background: #ccc;
+			padding: .5em;
+			margin: .5em;
+			border-radius: 5px;
+		}		
+
+	</style>
+
+	<div class="trip-search row">
+		<form method="post" action="#" class="form-inline">
+
+		<div class="form-group col-sm-5">
+			<!-- <div class="row"></div> -->
+			<label>Select By User:</label>
+			<select class="form-control col-md-6" name="owner">
+				<option value="">All Users</option>
+				<?php foreach ($allTrips as $key => $value): ?>
+					<option value=""><?php print $value->owner; ?></option>
+				<?php endforeach ?>
+			</select>
+		</div>
+		<div class="form-group col-sm-5">
+			<label>Select By Activity:</label>
+			<select class="form-control" name="activity">
+				<option value="">All Activities</option>
+				<?php foreach ($allTrips as $key => $value): ?>
+					<option value=""><?php print $value->activity; ?></option>
+				<?php endforeach ?>
+			</select>
+		</div>
+		<div class="col-sm-2"><input type="submit" name="trip_search" value="Search Trips" class="btn btn-success btn-sm"></div>
+		</form>
+	</div>
+
+	
+	<?php foreach ($trips as $key => $value): ?>
+		<div class="trips-display">
+			<p><span class="">Owner: </span><?php echo $value->owner ?></p>
+			<p><span class="">Activity: </span><?php echo $value->activity ?></p>
+			<p><span class="">Name: </span><?php echo $value->name ?></p>
+			<p><span class="">Desc: </span><?php echo $value->description ?></p>
+			<p><span class="">Date: </span><?php echo $value->dateOf ?></p>
+			<p><span class="">Rating: </span><?php echo $value->rating ?></p>
+			<p><span class="">Diff: </span><?php echo $value->difficulty ?></p>
+			<p><span class="">City: </span><?php echo $value->city ?></p>
+			<p><span class="">State: </span><?php echo $value->state ?></p>
+			<p><span class="">latlon: </span><?php echo $value->latlon ?></p>
+		</div>
+	<?php endforeach ?>
+
+	
+
+	<div>
+		
+	</div>
 
 
 

@@ -2,30 +2,40 @@
 
 include('includes/head.php');
 include('includes/header.php');
-// $tripService = new TripService(newClient());
-// $tripService->testService();
-
 include("Services/TripService.php");
-
 include("helpers.php");
 require('includes/guzzle.php');
 require('controllers/Control.php');
 require('controllers/TripController.php');
-
-
+$tripService = new TripService(newClient());
+$tripController = new TripController($tripService);
+session_start();
 $allActivities = null;
 
-
+$_SESSION['current_owner'] = "pagresham";
 // $tripController = new TripController($tripService);
 
 $name= $description= $date= $rating= $difficulty= $city= $state= $lat= $lon= "";
+$activs = [];
+// get a list of activities, post that, or a new activity
+// User should be whoever is 'logged' in the session
+$trips = $tripService->getEntries();
+
+if($trips) {
+	$activs = array_map('getAct', $trips); 
+	print_r($activs);
+}
+
+
 
 if(isset($_POST['submit_trip'])) {
 	// $strippedPost = htmlspecialchars($_POST);
 	$strippedPost = array_map('htmlspecialchars', $_POST);
+	print_r($strippedPost);
 	$res = $tripController->validateTrip($strippedPost);
 	if($res) {
 		header("Location: trips.php");
+
 	}
 }
 
@@ -46,12 +56,25 @@ if(isset($_POST['submit_trip'])) {
 			<div class="form-group">
 			    <label for="tname">Name</label>
 			    <input name="tname" type="text" class="form-control" id="tname" placeholder="Name you trip" required value="<?php echo isset($_POST['tname']) ? trim($_POST['tname']) : "" ?>">
-			    <small id="emailHelp" class="form-text text-muted">We know it was a great one!</small>
 	  		</div>
+
+	  		<div class="form-group">
+			    <label for="activity">Activity</label>
+			    <!-- need to use a select box OR a dropdown, but not both -->
+			    <select name="activity-select" class="form-control">
+			    	<option value="">Choose One</option>
+			    	<?php foreach ($activs as $key => $value): ?>
+			    		<option value="<?php print $value ?>"><?php $value ?></option>
+			    	<?php endforeach ?>
+			    	
+			    </select>
+	  		</div>
+	  		<div class="form-group">
+				<input name="activity" type="text" class="form-control" id="activity-input" placeholder="New Activity" required value="<?php echo isset($_POST['activity']) ? trim($_POST['activity']) : "" ?>">
+			</div>
 			<div class="form-group">
 			    <label for="description">Description</label>
 			    <textarea name="description" class="form-control" id="description" rows="2"  required><?php echo isset($_POST['description']) ? trim($_POST['description']) : "" ?></textarea>
-				<!-- <input type="text" name="description" class="form-control" id="description" value="<?php //echo isset($_POST['description']) ? $_POST['description'] : "" ?>" style="height: 4em;"> -->
 			</div>
 			<div class="form-group">
 			    <label for="date">Date Of Trip</label>
@@ -72,6 +95,7 @@ if(isset($_POST['submit_trip'])) {
 				
 				<input name="difficulty" class="form-control" type="range" id="difficulty" min="1" max="10" style="width:100%;" value="<?php echo isset($_POST['difficulty']) ? $_POST['difficulty'] : "" ?>">
 			</div>
+			
 		</div>
 	
 	  
@@ -94,6 +118,7 @@ if(isset($_POST['submit_trip'])) {
 			    	<input name='lon' type="text" class="form-control" id="lon" readonly placeholder="Longitude" value="<?php echo isset($_POST['lon']) ? $_POST['lon'] : "" ?>">
 			    </div>
 			</div>
+			<input type="hidden" name="owner" value="<?php echo $_SESSION['current_owner']; ?>">
 		    <div class="row">
 		    	<div class="col-6">
 		    		<button type="button" class="btn btn-sm btn-info" id="check_latlon">Check Lat/Lon</button>	
