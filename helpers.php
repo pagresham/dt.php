@@ -66,22 +66,62 @@ function entriesTable($arr, $headers) {
 }
 
 	// Used to filter search results in trips.php
-	function getBoth($t) {
-		if($t->owner == $owner && $t->activity == $activity)
-			return $v;
+	function getByBoth($t, $a, $o) {
+		$newArr = [];
+		foreach ($t as $trip) {
+			if ($trip->owner == $o && $trip->activity == $a) {
+				$newArr[] = $trip;	
+			}
+		}
+		return $newArr;
 	}
-	function getByOwner($t) {
-		if($t->owner == $owner)
-			return $v;
+
+
+	function getByOwner($t, $o) {
+		$newArr = [];
+		foreach ($t as $trip) {
+			if ($trip->owner == $o) {
+				$newArr[] = $trip;	
+			}
+		}
+		return $newArr;
 	}
-	function getByActivity($t) {
-		if($t->activity == $activity)
-			return $v;
+	function getByActivity($t, $a) {
+		$newArr = [];
+		foreach ($t as $trip) {
+			if ($trip->activity == $a) {
+				$newArr[] = $trip;	
+			}
+		}
+		return $newArr;
 	}
+
+
 	// Used to populate activity drop down on new_entry
 	function getAct($t) {
 		return $t->activity;
 	} 
+	function getOwner($t) {
+		return $t->owner;
+	} 
+
+
+	function printP($arg) {
+		print "<p>" . $arg . "</p>";
+	}
+
+	function getUniqueActivities($t) {
+		$activities = array_map("getAct", $t);
+		$uniqueActivities = array_unique($activities);
+		return $uniqueActivities;
+	}
+
+	function getUniqueOwners($t) {
+		$owners = array_map("getOwner", $t);
+		$uniqueOwners = array_unique($owners);
+		return $uniqueOwners;
+	}
+
 
 
 ?>

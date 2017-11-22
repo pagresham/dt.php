@@ -5,20 +5,9 @@
 // Turn on error reporting - How did i fix the error issues? - found error in php.ini file, that stopped logging from happening. 
 // 
 // I need to prioritize what I want to do with this app. 
-// Attach activity and owner to entry
-// Include Activity in form - use a query and a text input to capture activity
-// New Activity, mini form, inside of newEntry form
-// Allow search by activity
-// Allow search by Owner
+
 // Incorporate a Map!
 // Photo Upload?
-// Activity Select /  new Activiyt mini form
-// User Select, so entry has an owner
-// User Input field
-
-
-// Just write it without auth for now. Use a select box of users at the top to fake login
-// Populate dropdown from useres table, set session once validation
 
 
 // Example of setting the status or a response manually: 

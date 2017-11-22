@@ -28,10 +28,10 @@ if(isset($_POST['submit_owner'])) {
   <nav class="navbar navbar-expand-sm bg-dark navbar-light">
     <ul class="navbar-nav">
       <!-- Brand -->
-      <a class="navbar-brand" href="index.php">Daytripper.Php</a>
+      <a class="navbar-brand text-light" href="index.php">Daytripper.Php</a>
       <!-- Dropdown -->
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+        <a class="nav-link dropdown-toggle text-secondary" href="#" id="navbardrop" data-toggle="dropdown">
           Users
         </a>
         <div class="dropdown-menu">
@@ -41,7 +41,7 @@ if(isset($_POST['submit_owner'])) {
         </div>
       </li>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+        <a class="nav-link dropdown-toggle text-secondary" href="#" id="navbardrop" data-toggle="dropdown">
           Trips
         </a>
         <div class="dropdown-menu">

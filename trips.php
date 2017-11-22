@@ -12,19 +12,25 @@ $trips = $allTrips;
 
 
 if($allTrips) {
-
+print_r(getUniqueActivities($allTrips));
 	if(isset($_POST['trip_search'])) {
+		// print_r($_POST);
 		$owner = $_POST['owner'];
 		$activity = $_POST['activity'];
-		
+		// getTrip($t, $a, $o)
 		if($owner && $activity) {
-			$trips = array_map('getBoth', $allTrips);
+			printP("Owner and activity");
+			$trips = getByBoth($allTrips, $activity, $owner);
 		} else if ($owner){
-			$trips = array_map('getByOwner', $allTrips);
+			printP("Owner");
+			$trips = getByOwner($allTrips, $owner);
 		} else if ($activity){
-			$trips = array_map('getByActivity', $allTrips);
+			printP("activity");
+			$trips = getByActivity($allTrips, $activity);
 		} // else dont change $trips at all 
-		
+		else {
+			printP("neither");
+		}
 
 		
 	}
@@ -54,11 +60,11 @@ if($allTrips) {
 
 		<div class="col-md-5 form-group">
 			<!-- <div class="row"></div> -->
-			<label>Select By User:</label>
+			<label>Select By Owner:</label>
 			<select class="form-control col-md-6" name="owner">
-				<option value="">All Users</option>
-				<?php foreach ($allTrips as $key => $value): ?>
-					<option value=""><?php print $value->owner; ?></option>
+				<option value="">All Owners</option>
+				<?php foreach (getUniqueOwners($allTrips) as $key => $value): ?>
+					<option value="<?php print $value; ?>"><?php print $value; ?></option>
 				<?php endforeach ?>
 			</select>
 		</div>
@@ -66,8 +72,8 @@ if($allTrips) {
 			<label>Select By Activity:</label>
 			<select class="form-control" name="activity">
 				<option value="">All Activities</option>
-				<?php foreach ($allTrips as $key => $value): ?>
-					<option value=""><?php print $value->activity; ?></option>
+				<?php foreach (getUniqueActivities($allTrips) as $key => $value): ?>
+					<option value="<?php print $value; ?>"><?php print $value; ?></option>
 				<?php endforeach ?>
 			</select>
 		</div>

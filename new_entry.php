@@ -17,7 +17,7 @@ $activs = [];
 $trips = $tripService->getEntries();
 
 if($trips) {
-	$activs = array_map('getAct', $trips); 
+	$activs = getUniqueActivities($trips); 
 }
 
 
