@@ -1,5 +1,3 @@
-
-
 <?php
 
 // VHosts issues, couldn't get hosts to work on the Mac, but Windows worked fine.  
@@ -27,6 +25,7 @@
 // res.status(500).json({ error: 'something is wrong' });
 
 include('includes/head.php');
+include('includes/header.php');
 
 
 /*
@@ -36,10 +35,6 @@ This is a node.js application sitting at: /Users/piercegresham/Google Drive/java
  */
 
 
-include("Services/UserService.php");
-include("helpers.php");
-require("includes/guzzle.php");
-session_start();
 $userService = new UserService(newClient());
 
 
@@ -103,7 +98,7 @@ if(isset($_POST['users'])) {
 }
 
 
-include('includes/header.php');
+
 ?>
 <div class="container">
 		

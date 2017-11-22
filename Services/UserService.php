@@ -1,9 +1,7 @@
 <?php
 
 require 'vendor/autoload.php';
-// use GuzzleHttp\Client;
-// use GuzzleHttp\Psr7;
-// use GuzzleHttp\Exception\RequestException;
+
 
 /**
 * 
@@ -28,6 +26,16 @@ class UserService
 		$resp = file_get_contents($this->getUserURL);
 		// check response status / error here?
 		return json_decode($resp);
+	}
+
+	public function getUsersNames() {
+		$resp = file_get_contents($this->getUserURL);
+		$ownersJson = json_decode($resp);
+		function getNames($o) {
+			return $o->uname;
+		}
+		$ownerNames = array_map('getNames', $ownersJson);
+		return $ownerNames; 
 	}
 
 	public function getUser($_id) {

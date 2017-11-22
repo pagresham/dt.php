@@ -3,10 +3,6 @@
 include('includes/head.php');
 include('includes/header.php');
 
-include("Services/UserService.php");
-include("helpers.php");
-require('includes/guzzle.php');
-
 $userService = new UserService(newClient());
 
 $uname= $email= $password= $repassword= $successMessage= "";

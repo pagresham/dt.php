@@ -2,17 +2,12 @@
 
 include('includes/head.php');
 include('includes/header.php');
-include("Services/TripService.php");
-include("helpers.php");
-require('includes/guzzle.php');
-require('controllers/Control.php');
-require('controllers/TripController.php');
+
 $tripService = new TripService(newClient());
 $tripController = new TripController($tripService);
-session_start();
+
 $allActivities = null;
 
-$_SESSION['current_owner'] = "pagresham";
 // $tripController = new TripController($tripService);
 
 $name= $description= $date= $rating= $difficulty= $city= $state= $lat= $lon= "";
@@ -23,7 +18,6 @@ $trips = $tripService->getEntries();
 
 if($trips) {
 	$activs = array_map('getAct', $trips); 
-	print_r($activs);
 }
 
 
@@ -31,7 +25,7 @@ if($trips) {
 if(isset($_POST['submit_trip'])) {
 	// $strippedPost = htmlspecialchars($_POST);
 	$strippedPost = array_map('htmlspecialchars', $_POST);
-	print_r($strippedPost);
+	// print_r($strippedPost);
 	$res = $tripController->validateTrip($strippedPost);
 	if($res) {
 		header("Location: trips.php");
@@ -48,11 +42,11 @@ if(isset($_POST['submit_trip'])) {
 <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJl1s_ElOQABn5g9toMSrBQoKtBPv6NFs"></script>
 
+	<div style="text-align:center; margin: 1em;"><h3>Add a new trip to your list...</h3></div>
 	<form method="post" action="#">
 	<div class="row">
 		
 		<div class="col-sm-6" style="height: 29.1em;" id="checkht">
-			<h4>Description</h4>
 			<div class="form-group">
 			    <label for="tname">Name</label>
 			    <input name="tname" type="text" class="form-control" id="tname" placeholder="Name you trip" required value="<?php echo isset($_POST['tname']) ? trim($_POST['tname']) : "" ?>">
@@ -64,7 +58,7 @@ if(isset($_POST['submit_trip'])) {
 			    <select name="activity-select" class="form-control">
 			    	<option value="">Choose One</option>
 			    	<?php foreach ($activs as $key => $value): ?>
-			    		<option value="<?php print $value ?>"><?php $value ?></option>
+			    		<option value="<?php print $value ?>"><?php print $value ?></option>
 			    	<?php endforeach ?>
 			    	
 			    </select>
@@ -94,13 +88,10 @@ if(isset($_POST['submit_trip'])) {
 		    	</label>
 				
 				<input name="difficulty" class="form-control" type="range" id="difficulty" min="1" max="10" style="width:100%;" value="<?php echo isset($_POST['difficulty']) ? $_POST['difficulty'] : "" ?>">
-			</div>
-			
+			</div>		
 		</div>
 	
-	  
 		<div class="col-sm-6" style="height: 29.1em;position:relative">
-			<h4>Location</h4>
 			<div class="form-group">
 			    <label for="city">City</label>
 			    <input name="city" type="text" class="form-control" id="city" placeholder="City" value="<?php echo isset($strippedPost['city']) ? $strippedPost['city'] : "" ?>">
@@ -118,7 +109,7 @@ if(isset($_POST['submit_trip'])) {
 			    	<input name='lon' type="text" class="form-control" id="lon" readonly placeholder="Longitude" value="<?php echo isset($_POST['lon']) ? $_POST['lon'] : "" ?>">
 			    </div>
 			</div>
-			<input type="hidden" name="owner" value="<?php echo $_SESSION['current_owner']; ?>">
+			<input type="hidden" name="owner" value="<?php echo isset($_SESSION['owner']) ? $_SESSION['owner'] : ""; ?>">
 		    <div class="row">
 		    	<div class="col-6">
 		    		<button type="button" class="btn btn-sm btn-info" id="check_latlon">Check Lat/Lon</button>	

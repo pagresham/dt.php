@@ -1,18 +1,9 @@
 <?php
-// Ulster volunteers, british paramilitary force created to covertly fight the IRA
-
 include('includes/head.php');
 include('includes/header.php');
 
-include("Services/ActivityService.php");
-include("Services/TripService.php");
-include("controllers/TripController.php");
-include("helpers.php");
-require('includes/guzzle.php');
-session_start();
 $tService = new TripService(newClient());
 $tController = new TripController($tService);
-
 
 $allTrips = null;
 $allTrips = $tController->getEntries();
@@ -57,11 +48,11 @@ if($allTrips) {
 		}		
 
 	</style>
+<div class="container">
+	<div class="trip-search">
+		<form method="post" action="#" class="form-inline row">
 
-	<div class="trip-search row">
-		<form method="post" action="#" class="form-inline">
-
-		<div class="form-group col-sm-5">
+		<div class="col-md-5 form-group">
 			<!-- <div class="row"></div> -->
 			<label>Select By User:</label>
 			<select class="form-control col-md-6" name="owner">
@@ -71,7 +62,7 @@ if($allTrips) {
 				<?php endforeach ?>
 			</select>
 		</div>
-		<div class="form-group col-sm-5">
+		<div class="col-md-5 form-group">
 			<label>Select By Activity:</label>
 			<select class="form-control" name="activity">
 				<option value="">All Activities</option>
@@ -80,7 +71,7 @@ if($allTrips) {
 				<?php endforeach ?>
 			</select>
 		</div>
-		<div class="col-sm-2"><input type="submit" name="trip_search" value="Search Trips" class="btn btn-success btn-sm"></div>
+		<div class="col-md-2 ml-sm-auto"><input type="submit" name="trip_search" value="Search Trips" class="btn btn-success btn-sm"></div>
 		</form>
 	</div>
 
@@ -99,14 +90,7 @@ if($allTrips) {
 			<p><span class="">latlon: </span><?php echo $value->latlon ?></p>
 		</div>
 	<?php endforeach ?>
-
-	
-
-	<div>
-		
-	</div>
-
-
+</div>
 
 <?php
 }

@@ -1,9 +1,6 @@
 <?php
 
 require 'vendor/autoload.php';
-// use GuzzleHttp\Client;
-// use GuzzleHttp\Psr7;
-// use GuzzleHttp\Exception\RequestException;
 
 /**
 * Trip Service
@@ -65,9 +62,9 @@ class TripService
 		return false;
 	}
 
-	public function getOwners() {
-		return ["Pierce", "Sam", "Drew"];
-	}
+	// public function getOwners() {
+	// 	return ["Pierce", "Sam", "Drew"];
+	// }
 
 
 
