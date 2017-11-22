@@ -9,6 +9,15 @@
 // Incorporate a Map!
 // Photo Upload?
 
+// Bugs on Mac - 
+// 1. non unique values in trip search filter
+// 2. value taken from - answer: If the text field is filled out, that takes precedence
+// - maybe disable the other if one has a value in it. Woo Hoooo JavaScript
+
+
+// Can do if trip belongs to you...
+// update Trip
+// Delete Trip
 
 // Example of setting the status or a response manually: 
 // res.status(500).json({ error: 'something is wrong' });
