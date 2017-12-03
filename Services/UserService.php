@@ -11,7 +11,7 @@ class UserService
 
 	private $client; 
 	private $baseUrl = "http://dtrips.de/"; 
-	private $getUserURL =  "http://dtrips.de/user/"; 
+	private $getUserURL =  "http://dtrips.de/users/"; 
 	private $getActivityURL = "http://dtrips.de/api/activity";
 	private $getUser = "http://dtrips.de/users/id/";
 	private $getUserByUname = "http://dtrips.de/users/uname/";
