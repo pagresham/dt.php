@@ -10,12 +10,20 @@ class UserService
 {
 
 	private $client; 
-	
-	private $baseUrl = "http://localhost:3000/"; 
-	private $getUserURL =  "http://localhost:3000/user/"; 
-	private $getActivityURL = "http://localhost:3000/api/activity";
-	private $getUser = "http://localhost:3000/user/id/";
-	private $getUserByUname = "http://localhost:3000/user/uname/";
+	private $baseUrl = "http://dtrips.de/"; 
+	private $getUserURL =  "http://dtrips.de/user/"; 
+	private $getActivityURL = "http://dtrips.de/api/activity";
+	private $getUser = "http://dtrips.de/user/id/";
+	private $getUserByUname = "http://dtrips.de/user/uname/";
+
+
+
+
+	// private $baseUrl = "http://localhost:3000/"; 
+	// private $getUserURL =  "http://localhost:3000/user/"; 
+	// private $getActivityURL = "http://localhost:3000/api/activity";
+	// private $getUser = "http://localhost:3000/user/id/";
+	// private $getUserByUname = "http://localhost:3000/user/uname/";
 
 	function __construct($myClient)
 	{
