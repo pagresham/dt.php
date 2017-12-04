@@ -2,13 +2,13 @@
 
 function printUsers($myarr) {
 	print "<table class='table'>";
-	print "<tr><th>_id</th><th>uname</th><th>email</th><th></th><tr>";
+	print "<tr><th>uname</th><th>_id</th><th></th><tr>";
 	foreach ($myarr as $key => $value) {
 		print "<form method='post' action='#'>";
 		print "<tr>";
 		print "<td>". $value->uname ."</td>";
-		print "<td>". $value->email ."</td>";
 		print "<td>". $value->_id ."</td>";
+		// print "<td>". $value->email ."</td>";
 		print "<input type='hidden' name='_id' value='". $value->_id ."'/>";
 		print "<td><button type='submit' name='edit_user' class='btn btn-sm'>Edit User</button></td>";
 		print "</tr>";

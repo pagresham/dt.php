@@ -64,17 +64,19 @@ class UserService
 	}
 
 	public function newUser($uname, $email, $password) {
-		$resp = $this->client->request('POST', 'user/new', ['http_errors' => false, 'json' => ['uname' => $uname, 'email' => $email, 'password' => $password]]);
+		print "<p>Trying to add a new user</p>";
+		$resp = $this->client->request('POST', 'http://dtrips.de/users/new', ['http_errors' => false, 'json' => ['uname' => $uname, 'email' => $email, 'password' => $password]]);
 		if($resp->getStatusCode() == 200) {
 			return true;
 		}
+		print "<p>Status code NOT 200</p>";
 		return false;
 	}
 
 	// $params is an associative array of params to pass
 	public function updateUser($params) {
-		$urlPartial = 'user/new/'. $params['_id'];
-		$resp = $this->client->request('PUT', $urlPartial, ['http_errors' => false, 'json' => ['uname' => $params['uname'], 'email' => $params['email']]]);
+		$url = 'http://dtrips.de/users/new/'. $params['_id'];
+		$resp = $this->client->request('PUT', $url, ['http_errors' => false, 'json' => ['uname' => $params['uname'], 'email' => $params['email']]]);
 		if($resp->getStatusCode() == 200) {
 			return true;
 		}
